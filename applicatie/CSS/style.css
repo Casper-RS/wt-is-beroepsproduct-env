@@ -1,0 +1,665 @@
+/* ====================== HERBRUIKBARE CSS OP ALLE PAGINAS =================== */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdf4e3;
+    color: #333;
+}
+
+header {
+    background-image: url(/Images/bg.jpg);
+    color: rgb(228, 173, 54);
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+header .logo h1 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+header .logo p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+footer p {
+    margin: 0.5rem;
+}
+
+footer p a {
+    color: white;
+}
+
+footer p a:hover{
+    color: rgb(228, 173, 54);
+}
+
+footer {
+    position: sticky;
+    bottom: 0;
+    text-align: center;
+    padding: 1rem;
+    background-image: url(/Images/bg.jpg);
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul li {
+    margin-top: 0;
+}
+
+nav ul li a {
+    font-size: 1.3rem;
+    background-color: rgba(179, 179, 149, 0.3);
+    /* padding-top: 1.9rem;
+    padding-bottom: 2rem; */
+    border-radius: 10px;
+    border-style: solid;
+    text-decoration: none;
+    color: rgb(223, 194, 132);
+    font-weight: bold;
+    padding: 10px 10px;
+}
+
+.fa.fa-shopping-cart {
+    transition: all 0.2s;
+}
+
+.fa.fa-shopping-cart:hover {
+    transform: scale(1.1);
+}
+
+nav ul li a:hover{
+    background-color:   rgb(255, 205, 7, 0.5);
+}
+
+.privacyPage {
+    text-align: center;
+    list-style-position: inside;
+}
+
+/* ========================================= Home pagina CSS ========================================= */
+.homePage {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;    
+    text-align: center;
+    padding: 2rem;
+    background-image: url('/Images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    color: rgb(250, 246, 246);
+}
+
+.homeFooter {
+    margin-top: 8.3rem;
+}
+
+.homePage h2 {
+    margin-top: 1rem;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.homePage p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.homePage .btn {
+    background-color:  rgb(228, 173, 54);
+    color: black;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.homePage .btn:hover {
+    background-color: rgb(223, 194, 132);
+}
+
+.popular-pizzas {
+    padding: 2rem;
+    text-align: center;
+}
+
+.popular-pizzas h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.pizza-list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 11.9rem;
+}
+
+.pizza {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* ========================================= Pizza pagina CSS ========================================= */
+.pizzaListItem {
+    /* display: grid;
+    grid-template-columns: 1fr; */
+    background: white;  
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.pizzaListItem .pizzaPic {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.pizza-list {
+    margin: 1rem;
+    padding: 1rem;
+}
+
+button {
+    background-color: orange;
+    border-width: 1px;
+    border-color: darkorange;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.3s;
+    padding: 4px 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    border-style: solid;
+}
+
+button:hover {
+    transform: scale(0.95);
+    background-color: white;
+    color: orange;
+    cursor: pointer;
+}
+
+.pizzaMenu h2 {
+    background-color: orange;
+    border-radius: 10px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.popup {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 300px;
+    background-color: #fdf4e3;
+    color: rgb(228, 173, 54);
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    text-align: center;
+    z-index: 10;
+    animation: slideDown 1s forwards ease-in-out;
+}
+
+.popup-content h2 {
+    font-size: 24px;
+    margin-bottom: auto;
+}
+
+.popup-content p {
+    font-size: 15px;
+    margin-bottom: auto;
+}
+
+.close-btn {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    color: rgb(212, 42, 42);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Slide down animatie */
+@keyframes slideDown {
+    0% {
+        top: -100%;
+    }
+    100% {
+        top: 90px; /* Of pas deze waarde aan voor de positie waar je popup moet eindigen */
+    }
+}
+/* ========================================= Inlog pagina CSS ====================================== */
+
+/* styles.css */
+
+.inlogScherm {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdf4e3;
+    height: 100vh;
+}
+
+.loginTitle {
+    text-align: center;
+    color: darkorange;
+    border-radius: 10px;
+    border-color: gray;
+    margin-bottom: 1rem;
+
+}
+
+.loginTitle #homeButton{
+    background-color: orange;
+    border-width: 1px;
+    border-color: darkorange;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.3s;
+    padding: 4px 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    border-style: solid;
+}
+.login-container {
+    margin: 1rem;
+    justify-self: center;
+    align-items: center;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin: 1rem;
+    color: darkorange;
+}
+
+.login-form label {
+    font-size: 15px;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+    color: rgb(228, 188, 102);
+}
+
+select,
+input {
+    padding: 0.8rem;
+    margin-bottom: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-form button {
+    padding: 0.8rem;
+    background-color: #ff5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #c4451a;
+}
+
+.andereLoginKeuze {
+    text-align: center;
+    margin: 1rem;
+    padding: 0.5rem;
+    font-size: 14px;
+}
+
+.andereLoginKeuze a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.andereLoginKeuze a:hover {
+    text-decoration: underline;
+}
+
+.staffLogin {
+    margin-left: 5.9rem;
+}
+
+/* ========================================= User Account pagina CSS ========================================= */
+.account-page {
+    padding: 2rem;
+}
+
+.user-info {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.order-status {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+}
+
+.order h3 {
+    margin-top: 0;
+}
+
+.order-items {
+    list-style: none;
+    padding: 0;
+}
+
+.order-items li {
+    padding: 0.5rem 0;
+}
+
+/* Bestellingsstatus kleuren */
+.status {
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+}
+
+.status.in-progress {
+    background-color: #ffc107;
+    color: white;
+}
+
+.status.delivered {
+    background-color: #28a745;
+    color: white;
+}
+
+/* ========================================= Personeel Account pagina CSS ========================================= */
+.staff-page {
+    padding: 2rem;
+}
+
+
+/* Bestellingsbeheer knoppen */
+.order-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.order-actions .btn {
+    padding: 0.8rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.order-actions .btn:hover {
+    background-color: #0056b3;
+}
+
+.order-actions .btn.delete-order {
+    background-color: #dc3545;
+}
+
+.order-actions .btn.delete-order:hover {
+    background-color: #c82333;
+}
+
+/* ========================================= CSS WINKELWAGEN ========================================= */
+
+.header-content h1 {
+    margin: 0;
+}
+
+.cart-page {
+    padding: 2rem;
+}
+
+
+.cart-icon img {
+    width: 32px;
+    height: 18px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-img {
+    width: 100px;
+    height: 100px;
+    margin-right: 2rem;
+    border-radius: 8px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-details h3 {
+    margin: 0 0 0.5rem;
+}
+
+.cart-item-details p {
+    margin: 0;
+}
+/* =================== Slider, delete knop, + en - button =================== */
+
+/* Verwijderknop (prullenbak) */
+.remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+/* Quantity control */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.5rem;
+}
+
+.quantity-input {
+    margin-top: 2rem;
+    width: 60px;
+    text-align: center;
+    font-size: 16px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Plus and minus buttons */
+.plus-btn, .minus-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.plus-btn:hover, .minus-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
+.remove-btn i {
+    font-size: 20px;
+}
+/* =================== CSS Winkelmand & checkout knop =================== */
+
+.cart-total {
+    text-align: right;
+    margin-top: 2rem;
+}
+
+.cart-total h3 {
+    margin-bottom: 1rem;
+}
+
+.checkout-btn {
+    padding: 0.8rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.checkout-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.footerBasket{
+    position: sticky;
+    bottom: 0;
+    margin-top: 17.1rem;
+    text-align: center;
+    padding: 1rem;
+    background-image: url(/Images/bg.jpg);
+    color: white;
+
+}
+
+/* ========================================= CSS BESTELLING AFRONDEN ========================================= */
+/* Bezorggegevens pagina */
+.delivery-page {
+    padding: 3rem;
+    margin-left: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.delivery-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.delivery-form label {
+    font-size: 14px;
+    color: #555;
+}
+
+.delivery-form input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    margin: 0.5rem;
+}
+
+/* Knop voor doorgaan naar betalen */
+.payment-btn {
+    padding: 0.8rem;
+    background-color: #ff5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.payment-btn:hover {
+    background-color: #c4451a;
+}
+
+.paymentFooter{
+    position: sticky;
+    bottom: 0;
+    margin-top: -1.2rem;
+    text-align: center;
+    padding: 1rem;
+    background-image: url(/Images/bg.jpg);
+    color: white;
+}
+
+
+/* ========================================= Idk yet ========================================= */
+
+
+
+/* ========================================= Idk yet ========================================= */
