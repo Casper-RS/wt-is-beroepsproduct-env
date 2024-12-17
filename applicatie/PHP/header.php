@@ -1,16 +1,21 @@
 <?php
-function getHeader($brandName) {
+$brandname = 'Sole Machina';
+
+function getHeader()
+{
+    global $brandname;
     echo '
+    <body>
     <header>
         <div class="logo">
-            <h1>' . $brandName . '</h1>
+            <h1>' . $brandname . '</h1>
             <p>Elke dag vers bereid!</p>
         </div>
         <nav>
             <ul>
-                <li><a href="/HTML/home.html">Home</a></li>
-                <li><a href="/HTML/pizza.html">Pizza\'s</a></li>
-                <li><a href="/HTML/inlogScherm.html">Account</a></li>
+                <li><a href="/HTML/homePage.php">Home</a></li>
+                <li><a href="/HTML/pizzaPage.php">Pizza\'s</a></li>
+                <li><a href="/HTML/loginPage.php">Account</a></li>
                 <li>
                     <a href="/HTML/winkelmand.html">
                         <span class="cart-icon">
@@ -22,4 +27,3 @@ function getHeader($brandName) {
         </nav>
     </header>';
 }
-?>

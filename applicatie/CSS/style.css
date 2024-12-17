@@ -6,6 +6,7 @@ body {
     padding: 0;
     background-color: #fdf4e3;
     color: #333;
+    position: sticky;
 }
 
 header {
@@ -247,6 +248,10 @@ button:hover {
     text-decoration: none;
     cursor: pointer;
 }
+/* Hide the popup when "display: none" is set */
+.hidden {
+    display: none;
+  }
 
 /* Slide down animatie */
 @keyframes slideDown {
