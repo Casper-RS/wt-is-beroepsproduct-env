@@ -82,6 +82,11 @@ ALTER TABLE [Pizza_Order] ADD FOREIGN KEY ([personnel_username]) REFERENCES [Use
 ALTER TABLE [Pizza_Order_Product] ADD FOREIGN KEY ([order_id]) REFERENCES [Pizza_Order] ([order_id]);
 ALTER TABLE [Pizza_Order_Product] ADD FOREIGN KEY ([product_name]) REFERENCES [Product] ([name]);
 
+/* 
+=============================================================
+--Na het wijzigen van de records docker compose up gebruiken. 
+=============================================================
+ */                                                              
 -- -- Insert statements for 20 users with realistic names
 INSERT INTO [User] (username, [password], first_name, last_name, [role]) VALUES
 ('jdoe', 'wachtwoord', 'John', 'Doe', 'Client'),

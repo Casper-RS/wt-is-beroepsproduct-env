@@ -34,3 +34,4 @@ $popPizza = "Populaire Pizza's";
     <?php getFooter("$brandname") ?>
   </body>
 </html>
+
