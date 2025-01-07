@@ -4,14 +4,38 @@
     include '/applicatie/PHP/pizzaCard.php';
     include '/applicatie/PHP/footer.php';
 
+    require_once '/applicatie/PHP/db_connectie.php';
+
     $melding = ''; //De melding voor de error.
 
     if(isset($_POST['inloggenUser'])) { // <- Keycheck
         $melding = "Er is op de knop geklikt!";
 
-        $naam        = $_POST['usernameUser'];
-        $wachtwoord  = $_POST['passwordUser'];
-       
+        $username   = $_POST['usernameUser'];
+        $password = $_POST['passwordUser'];
+        // Verbinding maken met onze database.
+        $db = maakVerbinding();
+
+        $sql = 'SELECT password FROM User WHERE naam = :username';
+        //Nu stoppen we de query in de database om uit te voeren.
+        $query = $db->prepare($sql);
+        //Check of de gebruikersnaam in de database zit.
+        $data_array = [':username' => $username];
+        $query->execute($data_array);
+        if ($rij = $query->fetch()) {
+            //wachtwoord checken
+            $passwordhash = $rij['password'];
+            if (password_verify($password, $passwordhash)) {
+                session_start();
+                // header('location: index.php');
+                $_SESSION['user'] = $username;
+                $melding = 'Gebruiker is ingelogd';
+            } else {
+                $melding = 'Fout: incorrecte inloggegevens!!';
+            }
+        } else {
+            $melding = 'Incorrecte inloggegevens';
+        }       
     }
 
 
@@ -76,11 +100,11 @@
           <button type="submit" name="inloggenUser" value="inloggenUser">Inloggen</button>
           <?php $melding ?>
           <div class="andereLoginKeuze">
-            <a href="/HTML/accountRegisreren.html">Nog geen account? Registreer hier</a>
+            <a href="/HTML/registeryPage.php">Nog geen account? Registreer hier</a>
           </div>
           <h2>Personeel?</h2>
         </form>
-        <button class="staffLogin" onclick="location.href='inlogPersoneel.html'" type="button">
+        <button class="staffLogin" onclick="location.href='inlogStaff.php'" type="button">
           Klik hier om in te loggen
         </button>
       </div>

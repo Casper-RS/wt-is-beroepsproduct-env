@@ -5,7 +5,14 @@ include '/applicatie/PHP/pizzaCard.php';
 include '/applicatie/PHP/footer.php';
 
 $popPizza = "Populaire Pizza's";
+
+/*
+De pizzacard moet een form worden zodat er een button en post gemaakt kan worden.
+
+*/
 ?>
+
+
 
 <!DOCTYPE html>
     <?php
