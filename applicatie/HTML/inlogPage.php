@@ -9,6 +9,9 @@
     if(isset($_POST['inloggenUser'])) { // <- Keycheck
         $melding = "Er is op de knop geklikt!";
 
+        $naam        = $_POST['usernameUser'];
+        $wachtwoord  = $_POST['passwordUser'];
+       
     }
 
 
