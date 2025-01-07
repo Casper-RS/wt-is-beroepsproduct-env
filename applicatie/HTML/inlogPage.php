@@ -85,3 +85,14 @@
     <?php getFooter() ?>
   </body>
 </html>
+
+<?php
+/*
+Met een foreach loop door alle keys heen lopen, om te kijken of er niet teveel (overpost tag) of te weinig (underposting tags) zijn
+Via $_POST (superglobal) dit testen in de URL
+
+empty gebruiken of de ingevulde velden van de keys niet leeg zijn.
+
+
+*/
+?>
