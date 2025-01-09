@@ -80,6 +80,7 @@
           <label for="user-type">Type login:</label>
           <select id="user-type" name="user-type">
             <option value="user">Klant</option>
+            <option value="user">Personeel</option>            
           </select>
           <label for="usernameUser">Gebruikersnaam</label>
           <input

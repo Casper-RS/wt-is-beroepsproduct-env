@@ -14,9 +14,9 @@
       </div>
       <nav>
         <ul>
-          <li><a href="/HTML/home.html">Home</a></li>
-          <li><a href="/HTML/accountPaginaUser.html">Mijn bestellingen</a></li>
-          <li><a href="/HTML/inlogScherm.html">Uitloggen</a></li>
+          <li><a href="/HTML/homePage.php">Home</a></li>
+          <li><a href="/HTML/overviewUser.php">Mijn bestellingen</a></li>
+          <li><a href="/HTML/inlogUser.php">Uitloggen</a></li>
         </ul>
       </nav>
     </header>

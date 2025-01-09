@@ -9,6 +9,7 @@ $notification = '';
 
 if(isset($_POST['registerUser'])) {
     $errorMessage = [];
+    $usertype   = $_POST['usertype'];    
     $naam       = $_POST['createUsername'];
     $wachtwoord = $_POST['createPassword'];
     $email      = $_POST['createEmail'];
@@ -39,13 +40,17 @@ if(isset($_POST['registerUser'])) {
         $passwordhash = password_hash($wachtwoord, PASSWORD_DEFAULT);
         
         $db = maakVerbinding();
-        $sql = 'INSERT INTO User([username], [password], [first_name], [last_name])
-                values (:naam, :passwordhash, :email, :phone)';
+        $sql = 'INSERT INTO User([username], [password], [email], [phone], [role])
+                values (:naam, :passwordhash, :email, :phone, :usertype)';
         $query = $db->prepare($sql);
 
-        $data_array = ['naam' => $naam, 'passwordhash' => $passwordhash, 'email' => $email, 'phone' => $phone];
+        $data_array = ['naam' => $naam, 'passwordhash' => $passwordhash, 'email' => $email, 'phone' => $phone, 'usertype' => $usertype];
+        try {
         $succes = $query->execute($data_array);
-
+        }
+          catch (PDOException $e) {
+          die('Error: ' . $e->getMessage());
+        }
         // Check results
         if($succes) {
             $melding = 'Gebruiker is geregistreerd.';
@@ -56,18 +61,22 @@ if(isset($_POST['registerUser'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
   <?php getHeadSection(); ?>
   <body class="inlogScherm">
     <?php getHeader(); ?>
     <div class="login-container">
-      <form class="login-form" method="get" action="/HTML/inlogUser.php">
+      <form class="login-form" method="post" action="/HTML/overviewUser.php">
         <div class="loginTitle">
           <h1>Pizzaria Sola Machina</h1>
           <button id="homeButton" onclick="location.href='home.html'" type="button">Ga naar home pagina</button>
         </div>
         <h2>Registreer Account</h2>
+        <label for="usertype">Registratietype:</label>
+          <select id="usertype" name="usertype">
+            <option value="userRegistery">Klant</option>
+            <option value="staffRegistery">Personeel</option>            
+          </select>        
         <label for="createUsername">Gebruikersnaam</label>
         <input
           type="text"
