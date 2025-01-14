@@ -10,10 +10,10 @@ $notification = '';
 if(isset($_POST['registerUser'])) {
     $errorMessage = [];
     $usertype   = $_POST['usertype'];    
-    $naam       = $_POST['createUsername'];
-    $wachtwoord = $_POST['createPassword'];
-    $email      = $_POST['createEmail'];
-    $phone      = $_POST['createPhone'];
+    $naam       = $_POST['username'];
+    $wachtwoord = $_POST['Wachtwoord'];
+    $email      = $_POST['Emailadres'];
+    $phone      = $_POST['Telefoonnummer'];
 
     // Check of de string lengte een minimaal aantal is. 
     if(strlen($naam) < 4) {
@@ -40,10 +40,9 @@ if(isset($_POST['registerUser'])) {
         $passwordhash = password_hash($wachtwoord, PASSWORD_DEFAULT);
         
         $db = maakVerbinding();
-        $sql = 'INSERT INTO User([username], [password], [email], [phone], [role])
+        $sql = 'INSERT INTO [User]([username], [password], [email], [phone], [role])
                 values (:naam, :passwordhash, :email, :phone, :usertype)';
         $query = $db->prepare($sql);
-
         $data_array = ['naam' => $naam, 'passwordhash' => $passwordhash, 'email' => $email, 'phone' => $phone, 'usertype' => $usertype];
         try {
         $succes = $query->execute($data_array);
@@ -54,6 +53,7 @@ if(isset($_POST['registerUser'])) {
         // Check results
         if($succes) {
             $melding = 'Gebruiker is geregistreerd.';
+            header('Location: overviewUser.php');
         } else {
             $melding = 'Registratie is mislukt.';
         }
@@ -66,21 +66,21 @@ if(isset($_POST['registerUser'])) {
   <body class="inlogScherm">
     <?php getHeader(); ?>
     <div class="login-container">
-      <form class="login-form" method="post" action="/HTML/overviewUser.php">
+      <form class="login-form" method="post" action="/HTML/registeryPage.php">
         <div class="loginTitle">
           <h1>Pizzaria Sola Machina</h1>
           <button id="homeButton" onclick="location.href='home.html'" type="button">Ga naar home pagina</button>
         </div>
         <h2>Registreer Account</h2>
-        <label for="usertype">Registratietype:</label>
-          <select id="usertype" name="usertype">
-            <option value="userRegistery">Klant</option>
-            <option value="staffRegistery">Personeel</option>            
+        <label for="user-type">Registratietype:</label>
+          <select id="user-type" name="usertype">
+            <option value="Client">Klant</option>
+            <option value="Personnel">Personeel</option>            
           </select>        
         <label for="createUsername">Gebruikersnaam</label>
         <input
           type="text"
-          id="createUsername"
+          id="username"
           name="username"
           placeholder="Kies een gebruikersnaam" 
           pattern="{6, 20}"
@@ -88,7 +88,7 @@ if(isset($_POST['registerUser'])) {
         <label for="createPassword">Wachtwoord</label>
         <input
           type="password"
-          id="createPassword"
+          id="Wachtwoord"
           name="Wachtwoord"
           placeholder="Kies een wachtwoord"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -97,14 +97,14 @@ if(isset($_POST['registerUser'])) {
         <input
           autocomplete="email"
           type="email"
-          id="createEmail"
+          id="Emailadres"
           name="Emailadres"
           placeholder="Voer emailadres in"
           required/>
         <label for="createPhone">TelefoonNummer</label>
         <input
           type="tel"
-          id="createPhone"
+          id="Telefoonnummer"
           name="Telefoonnummer"
           placeholder="Geef uw telefoon nummer op"
           pattern="[0-9]{2}-[0-9]{8}"/>

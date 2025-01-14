@@ -40,7 +40,8 @@ CREATE TABLE [User] (
   [password] NVARCHAR(200) NOT NULL,
   [email] NVARCHAR(200) NOT NULL,
   [phone] NVARCHAR(200) NOT NULL,
-  [role] NVARCHAR(200) NOT NULL
+  [role] NVARCHAR(200) NOT NULL,
+  [personnelID] NVARCHAR(10) NOT NULL
 );
 
 -- Create ProductType table
@@ -95,19 +96,19 @@ ALTER TABLE [Pizza_Order_Product] ADD constraint f FOREIGN KEY ([order_id]) REFE
 ALTER TABLE [Pizza_Order_Product] ADD constraint g FOREIGN KEY ([product_name]) REFERENCES [Product] ([name]);
 
 -- -- Insert statements for 20 users with realistic names
-INSERT INTO [User] (username, [password], email, phone, [role])
+INSERT INTO [User] (username, [password], email, phone, [role], [personnelID])
 VALUES
-	('mvermeer', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client'),
-	('jstone', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client'),
-	('htimmer', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client'),
-	('sleap', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client'),
-	('addafee', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client'),
-	('adaderget', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client'),
-	('vsdvfhtr', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client'),
-	('pietdikhoofd', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel'),
-	('bcvxvzvzv', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel'),
-	('tyyretroe', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel'),
-	('opqopqp', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel');
+	('mvermeer', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client', '0'),
+	('jstone', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client', '0'),
+	('htimmer', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client', '0'),
+	('sleap', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client', '0'),
+	('addafee', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client', '0'),
+	('adaderget', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client', '0'),
+	('vsdvfhtr', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Client', '0'),
+	('pietdikhoofd', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel', '1'),
+	('bcvxvzvzv', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel', '1'),
+	('tyyretroe', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel', '1'),
+	('opqopqp', 'wachtwoord', 'niet.interessant@gmail.com', '06-1000000', 'Personnel', '1');
 
 
 -- Insert statements for product types

@@ -11,12 +11,12 @@
     if(isset($_POST['inloggenUser'])) { // <- Keycheck
         $melding = "Er is op de knop geklikt!";
 
-        $username   = $_POST['usernameUser'];
-        $password = $_POST['passwordUser'];
+        $username   = $_POST['username'];
+        $password = $_POST['password'];
         // Verbinding maken met onze database.
         $db = maakVerbinding();
 
-        $sql = 'SELECT password FROM User WHERE naam = :username';
+        $sql = 'SELECT password FROM [User] WHERE username = :username';
         //Nu stoppen we de query in de database om uit te voeren.
         $query = $db->prepare($sql);
         //Check of de gebruikersnaam in de database zit.
@@ -27,14 +27,14 @@
             $passwordhash = $rij['password'];
             if (password_verify($password, $passwordhash)) {
                 session_start();
-                // header('location: index.php');
+                header('location: overviewUser.php');
                 $_SESSION['user'] = $username;
                 $melding = 'Gebruiker is ingelogd';
             } else {
-                $melding = 'Fout: incorrecte inloggegevens!!';
+                $melding = 'Fout: Incorrecte inloggegevens!!';
             }
         } else {
-            $melding = 'Incorrecte inloggegevens';
+            $melding = 'Fout: Incorrecte inloggegevens';
         }       
     }
 
@@ -71,21 +71,20 @@
     ?>
     <main>
       <div class="login-container">
-        <form class="login-form" method="post" action="">
+        <form class="login-form" method="post" action="/HTML/inlogUser.php">
           <div class="loginTitle">
             <h1>Pizzaria Sola Machina</h1>
             <button id="homeButton" onclick="location.href='home.html'" type="button"> Ga naar home pagina</button>
           </div>
           <h2>Inloggen</h2>
           <label for="user-type">Type login:</label>
-          <select id="user-type" name="user-type">
-            <option value="user">Klant</option>
-            <option value="user">Personeel</option>            
+          <select id="user-type" name="usertype">
+            <option value="Client">Klant</option>        
           </select>
           <label for="usernameUser">Gebruikersnaam</label>
           <input
             type="text"
-            id="usernameUser"
+            id="username"
             name="username"
             placeholder="Voer je gebruikersnaam in"
             pattern="{6-20}"
@@ -93,13 +92,13 @@
           <label for="passwordUser">Wachtwoord</label>
           <input
             type="password"
-            id="passwordUser"
+            id="password"
             name="password"
             placeholder="Voer je wachtwoord in"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             required/>
+            <?php $melding ?>
           <button type="submit" name="inloggenUser" value="inloggenUser">Inloggen</button>
-          <?php $melding ?>
           <div class="andereLoginKeuze">
             <a href="/HTML/registeryPage.php">Nog geen account? Registreer hier</a>
           </div>
