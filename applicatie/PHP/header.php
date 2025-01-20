@@ -15,7 +15,7 @@ function getHeader()
             <ul>
                 <li><a href="/HTML/homePage.php">Home</a></li>
                 <li><a href="/HTML/pizzaPage.php">Pizza\'s</a></li>
-                <li><a href="/HTML/inlogUser.php">Account</a></li>
+                <li><a href="/HTML/loginPage.php">Account</a></li>
                 <li>
                     <a href="/HTML/winkelmand.html">
                         <span class="cart-icon">

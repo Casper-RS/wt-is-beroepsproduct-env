@@ -41,7 +41,7 @@ CREATE TABLE [User] (
   [email] NVARCHAR(200) NOT NULL,
   [phone] NVARCHAR(200) NOT NULL,
   [role] NVARCHAR(200) NOT NULL,
-  [personnelID] NVARCHAR(10) NOT NULL
+  [personnelID] NVARCHAR(10) NULL
 );
 
 -- Create ProductType table

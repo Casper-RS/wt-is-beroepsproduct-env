@@ -4,16 +4,18 @@
   include '/applicatie/PHP/pizzaCard.php';
   include '/applicatie/PHP/footer.php';
 
+
+  require_once '/applicatie/PHP/genPersonnelID.php';
   require_once '/applicatie/PHP/db_connectie.php';
-$notification = '';
+  $notification = '';
 
 if(isset($_POST['registerUser'])) {
     $errorMessage = [];
-    $usertype   = $_POST['usertype'];    
     $naam       = $_POST['username'];
     $wachtwoord = $_POST['Wachtwoord'];
     $email      = $_POST['Emailadres'];
     $phone      = $_POST['Telefoonnummer'];
+    $usertype   = $_POST['usertype']; // Toevoeging: haal usertype op uit formulier
 
     // Check of de string lengte een minimaal aantal is. 
     if(strlen($naam) < 4) {
@@ -27,10 +29,16 @@ if(isset($_POST['registerUser'])) {
     }
     if(strlen($phone) < 11) {
         $errorMessage[] = 'Telefoonnummer moet minimaal 11 karakters zijn.';
-    }    
-    // 3. opslaan van de gegevens
+    }
+
+    // Validatie voor usertype
+    if(!isset($usertype) || !in_array($usertype, ['Client', 'Personnel'])) {
+        $errorMessage[] = 'Selecteer een geldig registratietype: "Klant" of "Personeel".';
+    }
+
+    // 3. Opslaan van de gegevens
     if(count($errorMessage) > 0) {
-        $notification = "Check of de usernaam 4 en de password 8 karakters is.<ul>";
+        $notification = "Check of de gegevens correct zijn ingevuld.<ul>";
         foreach($errorMessage as $fout) {
             $notification .= "<li>$fout</li>";
         }
@@ -38,25 +46,34 @@ if(isset($_POST['registerUser'])) {
     } else {
         // Voordat het wachtwoord opgeslagen wordt hashen we het.
         $passwordhash = password_hash($wachtwoord, PASSWORD_DEFAULT);
-        
         $db = maakVerbinding();
-        $sql = 'INSERT INTO [User]([username], [password], [email], [phone], [role])
-                values (:naam, :passwordhash, :email, :phone, :usertype)';
+        
+        $sql = 'INSERT INTO [User]([username], [password], [email], [phone], [role], [personnelID])
+                VALUES (:naam, :passwordhash, :email, :phone, :usertype, :personnelID)';
+        
         $query = $db->prepare($sql);
-        $data_array = ['naam' => $naam, 'passwordhash' => $passwordhash, 'email' => $email, 'phone' => $phone, 'usertype' => $usertype];
+        $data_array = [
+            'naam' => $naam,
+            'passwordhash' => $passwordhash,
+            'email' => $email,
+            'phone' => $phone,
+            'usertype' => $usertype,
+            'personnelID' => ($usertype === 'Personnel' ? genPersonnelID() : null)
+        ];
+        
         try {
-        $succes = $query->execute($data_array);
+            $succes = $query->execute($data_array);
+        } catch (PDOException $e) {
+            die('Error: ' . $e->getMessage());
         }
-          catch (PDOException $e) {
-          die('Error: ' . $e->getMessage());
-        }
-        // Check results
-        if($succes) {
-            $melding = 'Gebruiker is geregistreerd.';
+        
+        if ($succes) {
             header('Location: overviewUser.php');
+            exit;
         } else {
-            $melding = 'Registratie is mislukt.';
+            echo 'Registratie is mislukt.';
         }
+        
     }
 }
 ?>
