@@ -2,18 +2,11 @@
 include '/applicatie/PHP/createHead.php';
 include '/applicatie/PHP/createHeader.php';
 include '/applicatie/PHP/handlePizzaCard.php';
+include '/applicatie/PHP/handleDrinkCard.php';
 include '/applicatie/PHP/createFooter.php';
 
 $popPizza = "Populaire Pizza's";
-
-/*
-De pizzacard moet een form worden zodat er een button en post gemaakt kan worden.
-
-*/
 ?>
-
-
-
 <!DOCTYPE html>
     <?php
         getHeadSection();
@@ -33,17 +26,11 @@ De pizzacard moet een form worden zodat er een button en post gemaakt kan worden
             <div class="pizzaMenu">
                 <h2>Pizza's</h2>
                 <div class="pizza-list">
-                    <?php
-                    showPizzaCards();
-                    ?>
+                    <?php showPizzaCards()?>
                 </div>
-                <h2>Salades & Dranken</h2>
+                <h2>Dranken</h2>
                 <div class="pizza-list">
-                    <?php
-                    createPizzaCard("/Images/margerita.png", "Margherita", "Pizza Margherita", 'Krokante korst, verse tomatensaus en kaas.', '€10,00');
-                    createPizzaCard("/Images/margerita.png", "Margherita", "Pizza Margherita", 'Krokante korst, verse tomatensaus en kaas.', '€10,00');
-                    createPizzaCard("/Images/margerita.png", "Margherita", "Pizza Margherita", 'Krokante korst, verse tomatensaus en kaas.', '€10,00');
-                    ?>
+                    <?php showDrinkCards()?>
                 </div>
             </div>
         </main>

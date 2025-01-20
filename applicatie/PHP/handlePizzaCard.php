@@ -1,5 +1,4 @@
 <?php
-include '/applicatie/PHP/button.php';
 include '/applicatie/PHP/db_connectie.php';
 
 function fetchAvailablePizzas($db) {

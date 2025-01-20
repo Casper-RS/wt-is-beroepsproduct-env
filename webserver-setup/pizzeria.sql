@@ -159,7 +159,6 @@ INSERT INTO Product_Ingredient (product_name, ingredient_name) VALUES
 ('Quattro Formaggi', 'Tomatensaus'),
 ('Quattro Formaggi', 'Gorgonzola'),
 ('Quattro Formaggi', 'Cheddar'),
-('Quattro Formaggi', 'Mozzarella'),
 ('Quattro Formaggi', 'Gouda'),
 ('Hawaiian', 'Tomatensaus'),
 ('Hawaiian', 'Anannas'),

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_name'], $_POS
     }
 }
 
-header('Location: /HTML/basket.php');
+header('Location: /HTML/basketPage.php');
 exit;
 ?>
 
