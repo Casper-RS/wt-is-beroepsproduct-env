@@ -1,6 +1,6 @@
 <?php
-include '/applicatie/PHP/head.php';
-include '/applicatie/PHP/header.php';
+include '/applicatie/PHP/createHead.php';
+include '/applicatie/PHP/createHeader.php';
 require_once '/applicatie/PHP/db_connectie.php';
 session_start();
 

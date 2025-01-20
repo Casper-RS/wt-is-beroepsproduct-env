@@ -1,7 +1,7 @@
 <?php
-include '/applicatie/PHP/head.php';
-include '/applicatie/PHP/header.php';
-include '/applicatie/PHP/footer.php';
+include '/applicatie/PHP/createHead.php';
+include '/applicatie/PHP/createHeader.php';
+include '/applicatie/PHP/createFooter.php';
 include '/applicatie/PHP/basketConvertionHTML.php';
 
 session_start();

@@ -2,7 +2,6 @@
 include '/applicatie/PHP/button.php';
 include '/applicatie/PHP/db_connectie.php';
 
-
 function fetchAvailablePizzas($db) {
     $sql = 'SELECT name, price, type_id, image_path FROM [Product] WHERE type_id = :type';
     $query = $db->prepare($sql);
@@ -17,12 +16,7 @@ function fetchIngredients($db, $productName) {
     return $query->fetchAll(PDO::FETCH_COLUMN); // Fetch only the ingredient_name column
 }
 
-
-
-// Connect to the database
 $db = maakVerbinding();
-
-// Fetch products from the database
 $pizzas = fetchAvailablePizzas($db);
 
 function showPizzaCards() {
@@ -34,12 +28,10 @@ function showPizzaCards() {
             $pizza['name'],                                // Alt text
             $pizza['name'],                                // Title text
             $ingredients,                                  // Ingredients as description
-            number_format((float)$pizza['price'], 2)      // Price
+            number_format((float)$pizza['price'], 2)
         );
     }
 }
-
-
 function createPizzaCard($imageSrc, $altText, $titleText, $ingredients, $price) {
     // Ensure $ingredients is an array
     if (!is_array($ingredients)) {
@@ -69,7 +61,7 @@ function createPizzaCard($imageSrc, $altText, $titleText, $ingredients, $price) 
     </div>';
 }
 
-
+//Card for the homepage, without a price
 function createNoButtonCard($imageSrc, $altText, $titleText, $description, $price){
     echo '
     <div class="pizzaListItem">
