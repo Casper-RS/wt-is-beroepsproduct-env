@@ -58,7 +58,8 @@ CREATE TABLE [Ingredient] (
 CREATE TABLE [Product] (
   [name] NVARCHAR(200) PRIMARY KEY,
   [price] DECIMAL(10,2) NOT NULL,
-  [type_id] NVARCHAR(200) NOT NULL
+  [type_id] NVARCHAR(200) NOT NULL,
+  [image_path] NVARCHAR(150) NULL
 );
 
 -- Create Product_Ingredient table
@@ -114,59 +115,60 @@ VALUES
 -- Insert statements for product types
 INSERT INTO ProductType ([name]) VALUES
 ('Pizza'),
-('Maaltijd'),
-('Specerij'),
-('Voorgerecht'),
 ('Drank');
 
 -- Insert statements for ingredients
 INSERT INTO Ingredient ([name]) VALUES
-('Tomaat'),
+('Tomatensaus'),
 ('Kaas'),
+('Specerijen'),
 ('Pepperoni'),
 ('Champignon'),
-('Ui'),
 ('Sla'),
-('Spek'),
-('Saus');
+('Cheddar'),
+('Mozzarella'),
+('Gouda'),
+('Gorgonzola'),
+('Anannas'),
+('Ham'),
+('Ui'),
+('Gegrild vlees');
 
 -- Insert statements for products
-INSERT INTO Product ([name], price, type_id) VALUES
-('Margherita Pizza', 9.99, 'Pizza'),
-('Pepperoni Pizza', 11.99, 'Pizza'),
-('Vegetarische Pizza', 10.99, 'Pizza'),
-('Hawaiian Pizza', 12.99, 'Pizza'),
-('Combinatiemaaltijd', 15.99, 'Maaltijd'),
-('Knoflookbrood', 4.99, 'Voorgerecht'),
-('Coca Cola', 2.49, 'Drank'),
-('Sprite', 2.49, 'Drank');
+INSERT INTO Product ([name], price, type_id, image_path) VALUES
+('Margherita', 9.99, 'Pizza', '/Images/margerita.png'),
+('Pepperoni', 11.99, 'Pizza', '/Images/salami.png'),
+('Quattro Formaggi', 10.99, 'Pizza', '/Images/4kaas.png'),
+('Hawaiian', 12.99, 'Pizza', '/Images/hawaii.png'),
+('Calzone', 18.99, 'Pizza', '/Images/calzone.png'),
+('Coca Cola', 2.49, 'Drank', '/Images/cola.png'),
+('Fanta', 2.49, 'Drank', '/Images/fanta.png'),
+('Water', 2.49, 'Drank', '/Images/water.png'),
+('Appelsap', 2.49, 'Drank', '/Images/appelsap.png'),
+('Sprite', 2.49, 'Drank', '/Images/sprite.png');
+
 
 -- Insert statements for product-ingredient relationships
 INSERT INTO Product_Ingredient (product_name, ingredient_name) VALUES
-('Margherita Pizza', 'Tomaat'), -- Margherita Pizza met Tomaat
-('Margherita Pizza', 'Kaas'), -- Margherita Pizza met Kaas
-('Pepperoni Pizza', 'Tomaat'), -- Pepperoni Pizza met Tomaat
-('Pepperoni Pizza', 'Kaas'), -- Pepperoni Pizza met Kaas
-('Pepperoni Pizza', 'Pepperoni'), -- Pepperoni Pizza met Pepperoni
-('Vegetarische Pizza', 'Tomaat'), -- Vegetarische Pizza met Tomaat
-('Vegetarische Pizza', 'Kaas'), -- Vegetarische Pizza met Kaas
-('Vegetarische Pizza', 'Champignon'), -- Vegetarische Pizza met Champignon
-('Vegetarische Pizza', 'Ui'), -- Vegetarische Pizza met Ui
-('Hawaiian Pizza', 'Tomaat'), -- Hawaiian Pizza met Tomaat
-('Hawaiian Pizza', 'Kaas'), -- Hawaiian Pizza met Kaas
-('Hawaiian Pizza', 'Pepperoni'), -- Hawaiian Pizza met Pepperoni
-('Hawaiian Pizza', 'Ui'), -- Hawaiian Pizza met Ui
-('Hawaiian Pizza', 'Sla'), -- Hawaiian Pizza met Sla
-('Hawaiian Pizza', 'Spek'), -- Hawaiian Pizza met Spek
-('Hawaiian Pizza', 'Saus'), -- Hawaiian Pizza met Saus
-('Combinatiemaaltijd', 'Tomaat'), -- Combinatiemaaltijd met Tomaat
-('Combinatiemaaltijd', 'Kaas'), -- Combinatiemaaltijd met Kaas
-('Combinatiemaaltijd', 'Pepperoni'), -- Combinatiemaaltijd met Pepperoni
-('Combinatiemaaltijd', 'Champignon'), -- Combinatiemaaltijd met Champignon
-('Combinatiemaaltijd', 'Ui'), -- Combinatiemaaltijd met Ui
-('Combinatiemaaltijd', 'Sla'), -- Combinatiemaaltijd met Sla
-('Combinatiemaaltijd', 'Spek'), -- Combinatiemaaltijd met Spek
-('Combinatiemaaltijd', 'Saus'); -- Combinatiemaaltijd met Saus
+('Margherita', 'Tomatensaus'),
+('Margherita', 'Kaas'),
+('Margherita', 'Specerijen'),
+('Pepperoni', 'Tomatensaus'),
+('Pepperoni', 'Kaas'),
+('Pepperoni', 'Pepperoni'),
+('Quattro Formaggi', 'Tomatensaus'),
+('Quattro Formaggi', 'Gorgonzola'),
+('Quattro Formaggi', 'Cheddar'),
+('Quattro Formaggi', 'Mozzarella'),
+('Quattro Formaggi', 'Gouda'),
+('Hawaiian', 'Tomatensaus'),
+('Hawaiian', 'Anannas'),
+('Hawaiian', 'Ham'),
+('Hawaiian', 'Ui'),
+('Calzone', 'Tomatensaus'),
+('Calzone', 'Sla'),
+('Calzone', 'Kaas'),
+('Calzone', 'Gegrild vlees');
 
 -- Insert statements for pizza orders
 INSERT INTO [Pizza_Order] (client_username, client_name, personnel_username, datetime, status, address) 
@@ -185,22 +187,22 @@ VALUES
 
 -- Insert statements for Pizza_Order_Product (dummy data for orders)
 INSERT INTO Pizza_Order_Product (order_id, product_name, quantity) VALUES
-(1, 'Margherita Pizza', 2),
+(1, 'Margherita', 2),
 (1, 'Coca Cola', 3),
-(2, 'Pepperoni Pizza', 1),
+(2, 'Pepperoni', 1),
 (2, 'Sprite', 2),
-(3, 'Vegetarische Pizza', 1),
-(3, 'Hawaiian Pizza', 1),
-(4, 'Combinatiemaaltijd', 2),
-(4, 'Knoflookbrood', 1),
-(5, 'Pepperoni Pizza', 1),
-(6, 'Margherita Pizza', 3),
-(6, 'Hawaiian Pizza', 2),
-(7, 'Combinatiemaaltijd', 2),
-(8, 'Knoflookbrood', 2),
-(8, 'Sprite', 1),
-(9, 'Pepperoni Pizza', 1),
-(10, 'Hawaiian Pizza', 2),
+(3, 'Quattro Formaggi', 1),
+(3, 'Hawaiian', 1),
+(4, 'Calzone', 2),
+(4, 'Fanta', 1),
+(5, 'Pepperoni', 1),
+(6, 'Margherita', 3),
+(6, 'Hawaiian', 2),
+(7, 'Calzone', 2),
+(8, 'Sprite', 2),
+(8, 'Quattro Formaggi', 1),
+(9, 'Pepperoni', 1),
+(10, 'Hawaiian', 2),
 (10, 'Coca Cola', 2);
 
 

@@ -17,7 +17,7 @@ function getHeader()
                 <li><a href="/HTML/pizzaPage.php">Pizza\'s</a></li>
                 <li><a href="/HTML/loginPage.php">Account</a></li>
                 <li>
-                    <a href="/HTML/winkelmand.html">
+                    <a href="/HTML/basketPage.php">
                         <span class="cart-icon">
                             <i class="fa fa-shopping-cart"></i>
                         </span>

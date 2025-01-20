@@ -68,7 +68,7 @@ if(isset($_POST['registerUser'])) {
         }
         
         if ($succes) {
-            header('Location: overviewUser.php');
+            header('Location: loginPage.php');
             exit;
         } else {
             echo 'Registratie is mislukt.';

@@ -47,7 +47,7 @@ getHeader();
 <main class="account-page">
   <section class="user-info">
     <h2>Welkom terug, <?php echo htmlspecialchars($displayName); ?>!</h2>
-    <p>Email: <?php echo htmlspecialchars($displayName); ?></p>
+    <p>Email: <?php echo htmlspecialchars($email); ?></p>
     <p>Laatst ingelogd: 20 november 2024</p>
   </section>
   <section class="order-status">

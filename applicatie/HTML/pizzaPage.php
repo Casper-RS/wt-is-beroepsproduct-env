@@ -34,12 +34,7 @@ De pizzacard moet een form worden zodat er een button en post gemaakt kan worden
                 <h2>Pizza's</h2>
                 <div class="pizza-list">
                     <?php
-                    createPizzaCard("/Images/margerita.png", "Margherita", "Margherita", 'Krokante korst, verse tomatensaus en kaas.', '€10,00');
-                    createPizzaCard("/Images/salami.png", "Pepperoni", "Pepperoni", 'Pikante salami en gesmolten kaas.', '€10,00');
-                    createPizzaCard("/Images/hawaii.png", "Hawaii", "Hawaii", 'Frisse ananas en een verse ham.', '€10,00');
-                    createPizzaCard("/Images/4kaas.png", "4 kazen", "Quattro Formaggi", '4 verschillende soorten kazen.', '€10,00');
-                    createPizzaCard("/Images/margerita.png", "speciale", "Speciale", 'Een delicatesse met champignons, ham en ui.', '€10,00');
-                    createPizzaCard("/Images/calzone.png", "calzone", "Calzone", 'De bekende calzone, een vertrouwde keuze.', '€10,00');
+                    showPizzaCards();
                     ?>
                 </div>
                 <h2>Salades & Dranken</h2>
