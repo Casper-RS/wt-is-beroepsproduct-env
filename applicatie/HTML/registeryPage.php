@@ -84,10 +84,6 @@ if(isset($_POST['registerUser'])) {
     <?php getHeader(); ?>
     <div class="login-container">
       <form class="login-form" method="post" action="/HTML/registeryPage.php">
-        <div class="loginTitle">
-          <h1>Pizzaria Sola Machina</h1>
-          <button id="homeButton" onclick="location.href='home.html'" type="button">Ga naar home pagina</button>
-        </div>
         <h2>Registreer Account</h2>
         <label for="user-type">Registratietype:</label>
           <select id="user-type" name="usertype">
