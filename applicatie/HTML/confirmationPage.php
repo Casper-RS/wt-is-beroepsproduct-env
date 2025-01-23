@@ -1,22 +1,23 @@
 <?php
-session_start();
-
-include '/applicatie/PHP/createHead.php';
-include '/applicatie/PHP/createHeader.php';
-include '/applicatie/PHP/createFooter.php';
+include '/applicatie/PHP/createHTMLHead.php';
+include '/applicatie/PHP/createHTMLHeader.php';
+include '/applicatie/PHP/createHTMLFooter.php';
 
 if (!isset($_SESSION['user'])) {
+    $_SESSION['error'] = 'Je moet ingelogd zijn om deze pagina te bekijken.';
     header('Location: /HTML/loginPage.php');
     exit;
 }
-
-// Logged-in user
 $username = $_SESSION['user'];
 ?>
+
+
 <!DOCTYPE html>
-<?php getHeadSection(); ?>
+<?php
+getHeadSection();
+getHeader();
+?>
 <body>
-    <?php getHeader(); ?>
     <main>
         <div class="confirmation-container">
             <h1>Bedankt voor je bestelling!</h1>
@@ -27,4 +28,5 @@ $username = $_SESSION['user'];
     </main>
     <?php getFooter(); ?>
 </body>
+
 </html>

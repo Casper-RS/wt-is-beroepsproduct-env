@@ -5,13 +5,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_name'], $_POS
     $productName = $_POST['product_name'];
     $quantity = (int) $_POST['quantity'];
 
-    // Ensure the basket exists and the product is valid
+    // Check of het winkelmandje sessie er is, en of het product bestaat in de database.
     if (isset($_SESSION['basket'][$productName]) && $quantity > 0) {
         $_SESSION['basket'][$productName]['quantity'] = $quantity;
     }
 }
 
-// Redirect back to the basket page
 header('Location: /HTML/basketPage.php');
 exit;
 ?>

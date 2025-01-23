@@ -1,9 +1,10 @@
 <?php
-include '/applicatie/PHP/createHead.php';
-include '/applicatie/PHP/createHeader.php';
-include '/applicatie/PHP/handlePizzaCard.php';
-include '/applicatie/PHP/handleDrinkCard.php';
-include '/applicatie/PHP/createFooter.php';
+include '/applicatie/PHP/createHTMLHead.php';
+include '/applicatie/PHP/createHTMLHeader.php';
+include '/applicatie/PHP/createHTMLFooter.php';
+
+require_once '/applicatie/PHP/createCardPizza.php';
+require_once '/applicatie/PHP/createCardDrink.php';
 
 $popPizza = "Populaire Pizza's";
 ?>
@@ -45,10 +46,7 @@ getHeader();
         });
     });
 </script>
-<footer class="pizzaFooter">
-    <p>&copy; 2024 Sole Machina ~ Alle rechten voorbehouden.</p>
-    <p><a href="/HTML/privacybeleid.html">Privacy & Voorwaarden</a></p>
-</footer>
+<?php getPizzaFooter(); ?>
 </body>
 
 </html>

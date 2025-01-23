@@ -1,13 +1,16 @@
 <?php
-include '/applicatie/PHP/createHead.php';
-include '/applicatie/PHP/createHeader.php';
-include '/applicatie/PHP/handlePizzaCard.php';
-include '/applicatie/PHP/createFooter.php';
+include '/applicatie/PHP/createHTMLHead.php';
+include '/applicatie/PHP/createHTMLHeader.php';
+include '/applicatie/PHP/createHTMLFooter.php';
 
+require_once '/applicatie/PHP/createCardPizza.php';
 require_once '/applicatie/PHP/db_connectie.php';
 
-$melding = ''; // Error message
-$usertype = $_POST['usertype'] ?? ''; // Default to empty
+
+$melding = $_SESSION['error'] ?? '';
+unset($_SESSION['error']); 
+
+$usertype = $_POST['usertype'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
     $username = $_POST['username'] ?? '';
@@ -17,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
     $db = maakVerbinding();
 
     if ($usertype === 'Client') {
-        // Check if the user is registered as Personnel
         $sql = 'SELECT role, password FROM [User] WHERE username = :username';
         $query = $db->prepare($sql);
         $query->execute([':username' => $username]);
@@ -36,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
         } else {
             $melding = 'Fout: Gebruikersnaam niet gevonden!';
         }
+        
     } elseif ($usertype === 'Personnel') {
-        // Handle personnel login
         $sql = 'SELECT password, personnelID FROM [User] WHERE username = :username';
         $query = $db->prepare($sql);
         $query->execute([':username' => $username]);

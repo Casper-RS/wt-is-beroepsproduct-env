@@ -325,7 +325,7 @@ button:hover {
     justify-self: center;
     align-items: center;
     background-color: white;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 350px;
@@ -340,6 +340,7 @@ button:hover {
 .login-form h2 {
     text-align: center;
     margin: 1rem;
+    margin-top: 0;
     color: darkorange;
 }
 
@@ -674,12 +675,8 @@ input {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     padding: 20px; /* Padding inside the card */
     margin: 15px 0; /* Margin between cards */
-    transition: transform 0.2s; /* Smooth transition for hover effect */
 }
 
-.order-card:hover {
-    transform: scale(1.02); /* Slightly enlarge the card on hover */
-}
 
 .order-items {
     list-style-type: none; /* Remove default list styling */
@@ -707,7 +704,7 @@ input {
     color: orange; /* Orange color for pending orders */
 }
 
-.status.cancelled {
+.status.not-processed {
     color: red; /* Red color for cancelled orders */
 }
 

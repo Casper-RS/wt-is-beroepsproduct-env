@@ -1,47 +1,50 @@
 <?php
+require_once '/applicatie/PHP/db_connectie.php';
+
 function calculateTotal($orderId){
-global $db;
+$db = maakVerbinding();
+
 $total = 0;
 
-// Fetch order items for the given order ID
+// Query om de items per order te verkrijgen.
 $sqlItems = 'SELECT product_name, quantity FROM Pizza_Order_Product WHERE order_id = :order_id';
 $queryItems = $db->prepare($sqlItems);
 $queryItems->execute([':order_id' => $orderId]);
 $items = $queryItems->fetchAll(PDO::FETCH_ASSOC);
 
-// Calculate total price based on item prices and quantities
+// Totaal prijs berekening.
 foreach ($items as $item) {
     $productName = $item['product_name'];
     $quantity = $item['quantity'];
 
-    // Fetch the price of the product
-    $sqlPrice = 'SELECT price FROM [Product] WHERE name = :product_name'; // Assuming a Products table exists
+    // Fetch per product de prijs uit de database.
+    $sqlPrice = 'SELECT price FROM [Product] WHERE name = :product_name';
     $queryPrice = $db->prepare($sqlPrice);
     $queryPrice->execute([':product_name' => $productName]);
     $price = $queryPrice->fetchColumn();
 
     if ($price !== false) {
-        $total += $price * $quantity; // Accumulate total
+        $total += $price * $quantity; // Totaal bedrag.
     }
 }
-
-return number_format($total, 2); // Return total formatted to 2 decimal places
+return number_format($total, 2); // Return een getal met 2 achter de komma.
 }
+
+
 
 function calculateItemPrice($productName, $quantity) {
-    global $db; // Use the global database connection
+    global $db;
 
-    // Fetch the price of the product
-    $sqlPrice = 'SELECT price FROM [Product] WHERE name = :product_name'; // Assuming a Products table exists
+    // Fetch per product de prijs uit de database.
+    $sqlPrice = 'SELECT price FROM [Product] WHERE name = :product_name';
     $queryPrice = $db->prepare($sqlPrice);
     $queryPrice->execute([':product_name' => $productName]);
     $price = $queryPrice->fetchColumn();
 
     if ($price !== false) {
-        return number_format($price * $quantity, 2); // Return total price for the item formatted to 2 decimal places
+        return number_format($price * $quantity, 2);
     }
-
-    return 0; // Return 0 if the product price is not found
+    return 0; // Return 0 als de prijs niet bestaat.
 }
 
 ?>

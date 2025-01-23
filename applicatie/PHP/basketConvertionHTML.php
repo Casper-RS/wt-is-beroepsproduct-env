@@ -12,7 +12,6 @@ function renderBasket($basket, &$total)
         $lineTotal = $price * $quantity;
         $total += $lineTotal;
 ?>
-
         <div class="cart-item">
             <img src="<?php echo htmlspecialchars($details['image']); ?>" alt="<?php echo htmlspecialchars($productName); ?>" class="cart-item-img" />
             <div class="cart-item-details">
@@ -35,19 +34,14 @@ function renderBasket($basket, &$total)
                 </button>
             </form>
         </div>
-
     <?php
     }
-
     ?>
-
     <div class="cart-total">
         <h3>Totaal: €<?php echo number_format($total, 2); ?></h3>
         <form method="post" action="/HTML/checkoutPage.php">
             <button type="submit" class="checkout-btn">Afrekenen</button>
         </form>
     </div>
-
-
 <?php
 }

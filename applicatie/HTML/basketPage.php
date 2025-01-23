@@ -1,10 +1,11 @@
 <?php
-include '/applicatie/PHP/createHead.php';
-include '/applicatie/PHP/createHeader.php';
-include '/applicatie/PHP/createFooter.php';
-include '/applicatie/PHP/basketConvertionHTML.php';
+include '/applicatie/PHP/createHTMLHead.php';
+include '/applicatie/PHP/createHTMLHeader.php';
+include '/applicatie/PHP/createHTMLFooter.php';
 
-$total = 0; // Initialize total
+require_once '/applicatie/PHP/basketConvertionHTML.php';
+
+$total = 0; // Initialiseer totaalbedrag.
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,6 @@ getHeader();
     <h2>Je Winkelmand</h2>
     <?php echo renderBasket($_SESSION['basket'] ?? [], $total);?>
 </main>
-<?php getFooter(); ?>
+<?php getPizzaFooter(); ?>
 </body>
 </html>

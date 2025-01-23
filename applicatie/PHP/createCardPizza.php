@@ -1,5 +1,8 @@
 <?php
 include '/applicatie/PHP/db_connectie.php';
+$db = maakVerbinding();
+$pizzas = fetchAvailablePizzas($db);
+
 
 function fetchAvailablePizzas($db) {
     $sql = 'SELECT name, price, type_id, image_path FROM [Product] WHERE type_id = :type';
@@ -8,6 +11,7 @@ function fetchAvailablePizzas($db) {
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
 function fetchIngredients($db, $productName) {
     $sql = 'SELECT ingredient_name FROM [Product_Ingredient] WHERE product_name = :product_name';
     $query = $db->prepare($sql);
@@ -15,8 +19,6 @@ function fetchIngredients($db, $productName) {
     return $query->fetchAll(PDO::FETCH_COLUMN); // Fetch only the ingredient_name column
 }
 
-$db = maakVerbinding();
-$pizzas = fetchAvailablePizzas($db);
 
 function showPizzaCards() {
     global $pizzas, $db;
@@ -31,20 +33,19 @@ function showPizzaCards() {
         );
     }
 }
-function createPizzaCard($imageSrc, $altText, $titleText, $ingredients, $price) {
-    // Ensure $ingredients is an array
-    if (!is_array($ingredients)) {
-        $ingredients = [$ingredients]; // Wrap the string in an array
-    }
 
-    // Generate ingredients list
+
+function createPizzaCard($imageSrc, $altText, $titleText, $ingredients, $price) {
+    if (!is_array($ingredients)) {
+        $ingredients = [$ingredients];
+    }
+    // Genereer alle ingredienten.
     $ingredientsHtml = '';
     if (!empty($ingredients)) {
         $ingredientsHtml = implode(', ', array_map('htmlspecialchars', $ingredients));
     } else {
         $ingredientsHtml = 'Geen ingrediënten beschikbaar';
     }
-
     echo '
     <div class="pizzaListItem">
         <form method="post" action="/PHP/basketAddProduct.php">
@@ -60,7 +61,8 @@ function createPizzaCard($imageSrc, $altText, $titleText, $ingredients, $price) 
     </div>';
 }
 
-//Card for the homepage, without a price
+
+// Alleen voor de homepagina. Zonder bestelknop en prijs.
 function createNoButtonCard($imageSrc, $altText, $titleText, $description, $price){
     echo '
     <div class="pizzaListItem">

@@ -1,6 +1,7 @@
 <?php
 $brandname = 'Sole Machina';
 
+
 function getHeadSection()
 {
     global $brandname; // Use the global variable inside the function
