@@ -23,7 +23,6 @@ body {
     padding: 0;
     background-color: #fdf4e3;
     color: #333;
-    position: sticky;
 }
 
 header {
@@ -60,7 +59,18 @@ footer p a:hover{
 }
 
 footer {
-    position: sticky;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding: 1rem;
+    background-image: url(/Images/bg.jpg);
+    color: white;
+}
+
+.pizzaFooter {
+    position: relative;
+    width: auto;
     bottom: 0;
     text-align: center;
     padding: 1rem;
@@ -92,6 +102,19 @@ nav ul li a {
     padding: 10px 10px;
 }
 
+.logout-btn {
+    font-size: 1.3rem;
+    background-color: rgba(179, 179, 149, 0.3);
+    border-radius: 10px;
+    border-style: solid;
+    text-decoration: none;
+    color: rgb(223, 194, 132);
+    font-weight: bold;
+    padding: 10px 10px;
+    gap: 10rem;
+    margin-top: -0.65rem;
+}
+
 .fa.fa-shopping-cart {
     transition: all 0.2s;
 }
@@ -119,10 +142,6 @@ nav ul li a:hover{
     background-size: cover;
     background-position: center;
     color: rgb(250, 246, 246);
-}
-
-.homeFooter {
-    margin-top: 8.3rem;
 }
 
 .homePage h2 {
@@ -593,31 +612,20 @@ input {
     background-color: #0056b3;
 }
 
-
-.footerBasket{
-    position: sticky;
-    bottom: 0;
-    margin-top: 17.1rem;
-    text-align: center;
-    padding: 1rem;
-    background-image: url(/Images/bg.jpg);
-    color: white;
-
-}
-
 /* ========================================= CSS BESTELLING AFRONDEN ========================================= */
 /* Bezorggegevens pagina */
 .delivery-page {
-    padding: 3rem;
+    padding: 1.5rem;
     margin-left: 3rem;
     max-width: 600px;
     margin: 0 auto;
+    margin-bottom: 3rem;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.delivery-page h2 {
+.delivery-page h1 {
     text-align: center;
     margin-bottom: 2rem;
     color: #333;
@@ -626,7 +634,6 @@ input {
 .delivery-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
 }
 
 .delivery-form label {
@@ -639,7 +646,8 @@ input {
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 14px;
-    margin: 0.5rem;
+    margin-top: 0.6rem;
+    margin-bottom: 2.5rem;
 }
 
 /* Knop voor doorgaan naar betalen */
@@ -652,26 +660,56 @@ input {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 1rem;
 }
 
 .payment-btn:hover {
     background-color: #c4451a;
 }
 
-.paymentFooter{
-    position: sticky;
-    bottom: 0;
-    margin-top: -1.2rem;
-    text-align: center;
-    padding: 1rem;
-    background-image: url(/Images/bg.jpg);
-    color: white;
-}
-
 
 /* ========================================= Idk yet ========================================= */
+.order-card {
+    background-color: #e1dec4; /* White background for the card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the card */
+    margin: 15px 0; /* Margin between cards */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
 
+.order-card:hover {
+    transform: scale(1.02); /* Slightly enlarge the card on hover */
+}
+
+.order-items {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+}
+
+.order-items li {
+    padding: 5px 0; /* Padding for each item */
+    border-bottom: 1px solid #e0e0e0; /* Light border between items */
+}
+
+.order-items li:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
+
+.status {
+    font-weight: bold; /* Bold text for status */
+}
+
+.status.completed {
+    color: green; /* Green color for completed orders */
+}
+
+.status.pending {
+    color: orange; /* Orange color for pending orders */
+}
+
+.status.cancelled {
+    color: red; /* Red color for cancelled orders */
+}
 
 
 /* ========================================= Idk yet ========================================= */

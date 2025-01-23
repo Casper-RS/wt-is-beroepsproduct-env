@@ -4,7 +4,6 @@ include '/applicatie/PHP/createHeader.php';
 include '/applicatie/PHP/createFooter.php';
 include '/applicatie/PHP/basketConvertionHTML.php';
 
-session_start();
 $total = 0; // Initialize total
 ?>
 

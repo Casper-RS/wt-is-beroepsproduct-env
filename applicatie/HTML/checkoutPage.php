@@ -1,77 +1,144 @@
+<?php
+require_once '/applicatie/PHP/db_connectie.php';
+include '/applicatie/PHP/createHeader.php';
+include '/applicatie/PHP/createHead.php';
+
+if (!isset($_SESSION['user'])) {
+  header('Location: /HTML/loginPage.php');
+  exit;
+}
+
+$username = $_SESSION['user']; // Logged-in user's username
+$basket = $_SESSION['basket'] ?? [];
+$errors = [];
+
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+try {
+  $db = maakVerbinding();
+
+  // Fetch user details
+  $sql = 'SELECT username, email FROM [User] WHERE username = :username';
+  $query = $db->prepare($sql);
+  $query->execute([':username' => $username]);
+  $user = $query->fetch(PDO::FETCH_ASSOC);
+
+  if (!$user) {
+    $errors[] = "Gebruikersgegevens niet gevonden.";
+  }
+} catch (PDOException $e) {
+  $errors[] = "Fout bij het ophalen van gebruikersgegevens: " . $e->getMessage();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name'] ?? '');
+  $address = trim($_POST['address'] ?? '');
+  $postalCode = trim($_POST['postal_code'] ?? '');
+  $email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
+  $phone = trim($_POST['phone'] ?? '');
+  $status = 1; // Default status
+  $datetime = date('Y-m-d H:i:s');
+  $personnel = 'pietdikhoofd'; // Always assign pietdikhoofd as personnel
+
+  // Validate form inputs
+  if (empty($name) || empty($address) || empty($postalCode) || empty($email) || empty($phone)) {
+    $errors[] = "Vul alle velden in.";
+  }
+
+  if (empty($basket)) {
+    $errors[] = "Je winkelmandje is leeg.";
+  }
+
+  if (empty($errors)) {
+    try {
+      // Insert the order into the Pizza_Order table
+      $sqlOrder = "
+              INSERT INTO [Pizza_Order] (client_username, client_name, personnel_username, datetime, status, address)
+              VALUES (:client_username, :client_name, :personnel_username, :datetime, :status, :address)
+          ";
+      $stmtOrder = $db->prepare($sqlOrder);
+      $stmtOrder->execute([
+        ':client_username' => $username ?: null, // Handle NULL for non-logged-in users
+        ':client_name' => $name,
+        ':personnel_username' => $personnel,
+        ':datetime' => $datetime,
+        ':status' => $status,
+        ':address' => $address . ', ' . $postalCode,
+      ]);
+
+      $orderId = $db->lastInsertId(); // Get the last inserted order ID
+
+      // Insert products into Pizza_Order_Product table
+      $sqlItem = "
+              INSERT INTO Pizza_Order_Product (order_id, product_name, quantity)
+              VALUES (:order_id, :product_name, :quantity)
+          ";
+      $stmtItem = $db->prepare($sqlItem);
+
+      foreach ($basket as $productName => $details) {
+        $stmtItem->execute([
+          ':order_id' => $orderId,
+          ':product_name' => $productName,
+          ':quantity' => $details['quantity'],
+        ]);
+      }
+
+      $_SESSION['basket'] = []; // Clear the basket after successful order
+      header('Location: /HTML/confirmationPage.php');
+      exit;
+    } catch (PDOException $e) {
+      $errors[] = "Fout bij het plaatsen van je bestelling: " . $e->getMessage();
+    }
+  }
+}
+
+?>
+
 <!DOCTYPE html>
-<html lang="nl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bezorggegevens | Pizzeria Bella Italia</title>
-    <link rel="stylesheet" href="/CSS/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-  </head>
-  <body>
-    <header>
-      <div class="logo">
-        <h1>Sole Machina</h1>
-        <p>Elke dag vers bereid!</p>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="/HTML/home.html">Home</a></li>
-          <li><a href="/HTML/pizza.html">Pizza's</a></li>
-          <li><a href="/HTML/inlogScherm.html">Account</a></li>
-          <li>
-            <a href="/HTML/winkelmand.html">
-              <span class="cart-icon">
-                <i class="fa fa-shopping-cart"></i>
-              </span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main class="delivery-page">
-      <h2>Bezorggegevens</h2>
-      <form class="delivery-form">
-        <label for="name">Naam:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Voor- en achternaam"
-          required/>
-        <label for="address">Adres:</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          placeholder="Straatnaam en huisnummer"
-          required/>
-        <label for="postcode">Postcode:</label>
-        <input
-          type="text"
-          id="postcode"
-          name="postcode"
-          placeholder="1234 AB"
-          required/>
-        <label for="city">Woonplaats:</label>
-        <input
-          type="text"
-          id="city"
-          name="city"
-          placeholder="Woonplaats"
-          required/>
-        <label for="phone">Telefoonnummer:</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="06-12345678"
-          required/>
-        <button class="payment-btn" type="submit">Doorgaan naar betalen</button>
-      </form>
-    </main>
-    <footer>
-      <p>&copy; 2024 Sole Machina. Alle rechten voorbehouden.</p>
-      <p><a href="/HTML/privacybeleid.html">Privacy & Voorwaarden</a></p>
-    </footer>
-  </body>
+<html>
+<?php
+getHeader();
+getHeadSection();
+?>
+<div class="delivery-page">
+  <h1>Afrekenen</h1>
+
+  <?php if (!empty($errors)): ?>
+    <div class="errors">
+      <ul>
+        <?php foreach ($errors as $error): ?>
+          <li><?php echo htmlspecialchars($error); ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <form class="delivery-form" method="post" action="">
+    <label for="name">Naam:</label>
+    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($_POST['name'] ?? ''); ?>" required>
+
+    <label for="address">Adres:</label>
+    <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($_POST['address'] ?? ''); ?>" required>
+
+    <label for="postal_code">Postcode:</label>
+    <input type="text" id="postal_code" name="postal_code" value="<?php echo htmlspecialchars($_POST['postal_code'] ?? ''); ?>" required>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($_POST['email'] ?? $user['email'] ?? ''); ?>" required>
+
+    <label for="phone">Telefoonnummer:</label>
+    <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($_POST['phone'] ?? ''); ?>" required>
+
+    <button type="submit" class="payment-btn">Bestel & betaal</button>
+  </form>
+</div>
+<footer class="pizzaFooter">
+  <p>&copy; 2024 Sole Machina ~ Alle rechten voorbehouden.</p>
+  <p><a href="/HTML/privacybeleid.html">Privacy & Voorwaarden</a></p>
+</footer>
+</body>
+
 </html>
