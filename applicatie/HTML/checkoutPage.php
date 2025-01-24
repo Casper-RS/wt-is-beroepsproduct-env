@@ -64,6 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo renderDeliveryForm($user); 
     ?>
 </div>
-<?php getFooter(); ?>
+<?php getPizzaFooter(); ?>
 </body>
 </html>

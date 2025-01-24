@@ -8,7 +8,13 @@ require_once '/applicatie/PHP/db_connectie.php';
 
 
 $melding = $_SESSION['error'] ?? '';
-unset($_SESSION['error']); 
+unset($_SESSION['error']);
+
+if (isset($_SESSION['registration_succesful'])) {
+    $meldinggoed = $_SESSION['registration_succesful'] ?? '';
+    unset($_SESSION['registration_succesful']);
+}
+
 
 $usertype = $_POST['usertype'] ?? '';
 
@@ -38,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
         } else {
             $melding = 'Fout: Gebruikersnaam niet gevonden!';
         }
-        
     } elseif ($usertype === 'Personnel') {
         $sql = 'SELECT password, personnelID FROM [User] WHERE username = :username';
         $query = $db->prepare($sql);
@@ -66,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
 
 <!DOCTYPE html>
 <?php getHeadSection(); ?>
+
 <body class="inlogScherm">
     <?php getHeader(); ?>
     <main>
@@ -75,6 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
                 <?php if ($melding): ?>
                     <div class="error-box">
                         <?php echo htmlspecialchars($melding); ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($meldinggoed): ?>
+                    <div class="success-box">
+                        <?php echo htmlspecialchars($meldinggoed); ?>
                     </div>
                 <?php endif; ?>
                 <label for="user-type">Type login:</label>
@@ -89,8 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
                         id="personnelID"
                         name="personnelID"
                         placeholder="Geef personeel ID op"
-                        value="<?php echo htmlspecialchars($_POST['personnelID'] ?? ''); ?>"
-                    />
+                        value="<?php echo htmlspecialchars($_POST['personnelID'] ?? ''); ?>" />
                 <?php endif; ?>
                 <label for="username">Gebruikersnaam</label>
                 <input
@@ -99,16 +109,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
                     name="username"
                     placeholder="Voer je gebruikersnaam in"
                     required
-                    value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
-                />
+                    value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>" />
                 <label for="password">Wachtwoord</label>
                 <input
                     type="password"
                     id="password"
                     name="password"
                     placeholder="Voer je wachtwoord in"
-                    required
-                />
+                    required />
                 <button type="submit" name="submit-login" value="submit-login">Inloggen</button>
                 <div class="andereLoginKeuze">
                     <a href="/HTML/registeryPage.php">Nog geen account? Registreer hier</a>
@@ -118,4 +126,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-login'])) {
     </main>
     <?php getFooter(); ?>
 </body>
+
 </html>

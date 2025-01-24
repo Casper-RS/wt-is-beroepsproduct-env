@@ -2,7 +2,7 @@
 $brandname = 'Sole Machina';
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Start een sessie als die nog niet bestaat.
+    session_start(); // Start a session if it doesn't exist.
 }
 
 function getHeader()
@@ -22,8 +22,7 @@ function getHeader()
                 <li><a href="/HTML/homePage.php">Home</a></li>
                 <li><a href="/HTML/pizzaPage.php">Pizza\'s</a></li>';
 
-
-    if ($isLoggedInUser ) {
+    if ($isLoggedInUser) {
         echo '
                 <li><a href="/HTML/overviewUser.php">Mijn Account</a></li>
                 <li>
@@ -31,8 +30,6 @@ function getHeader()
                         <button type="submit" class="logout-btn">Uitloggen</button>
                     </form>
                 </li>';
-
-
     } elseif ($isLoggedInStaff) {
         echo '
                 <li><a href="/HTML/overviewStaff.php">Mijn Account</a></li>
@@ -41,12 +38,11 @@ function getHeader()
                         <button type="submit" class="logout-btn">Uitloggen</button>
                     </form>
                 </li>';
-
-                
     } else {
         echo '
                 <li><a href="/HTML/loginPage.php">Account</a></li>';
     }
+
     echo '
                 <li>
                     <a href="/HTML/basketPage.php">
@@ -54,6 +50,12 @@ function getHeader()
                             <i class="fa fa-shopping-cart"></i>
                         </span>
                     </a>
+                </li>
+                <li>
+                    <form method="post" action="/PHP/searchProducts.php" class="search-form">
+                        <input type="text" name="query" placeholder="Zoek producten..." required>
+                        <button type="submit">Zoek</button>
+                    </form>
                 </li>
             </ul>
         </nav>

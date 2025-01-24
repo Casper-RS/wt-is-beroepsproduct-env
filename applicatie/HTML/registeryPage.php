@@ -66,11 +66,13 @@ if (isset($_POST['registerUser'])) {
       die('Error: ' . $e->getMessage());
     }
 
+    session_start();
     if ($succes) {
-      header('Location: loginPage.php');
-      exit;
+      $_SESSION['registration_succesful'] = 'Registratie gelukt. Login om te bestellen en je account te bekijken!';
+        header('Location: loginPage.php');
+        exit;
     } else {
-      echo 'Registratie is mislukt.';
+        echo 'Registratie is mislukt.';
     }
   }
 }
